@@ -1,0 +1,21 @@
+# Local dependencies and build outputs
+elevator-cad-app/backend/.venv/
+elevator-cad-app/backend/__pycache__/
+elevator-cad-app/frontend/node_modules/
+elevator-cad-app/frontend/dist/
+elevator-cad-app/frontend/*.tsbuildinfo
+
+# Local logs and temporary exports
+log.txt
+*.log
+*.dxf.tmp
+api-*.dxf
+*-test.dxf
+playwright-*.dxf
+playwright-*.png
+
+# Editor and OS files
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
