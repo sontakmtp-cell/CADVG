@@ -3,17 +3,18 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 from pydantic import BaseModel, Field
 
-from cad_engine import DEFAULT_A, DEFAULT_B, generate_elevator_dxf
+from cad_engine import DEFAULT_A, DEFAULT_B, DEFAULT_C, generate_elevator_dxf
 
 
-class RailBracketParameters(BaseModel):
+class PartParameters(BaseModel):
     A: float = Field(default=DEFAULT_A, gt=0)
     B: float = Field(default=DEFAULT_B, gt=0)
+    C: float = Field(default=DEFAULT_C, gt=0)
 
 
 class PartRequest(BaseModel):
     partName: str
-    parameters: RailBracketParameters
+    parameters: PartParameters
 
 
 class ExportRequest(BaseModel):

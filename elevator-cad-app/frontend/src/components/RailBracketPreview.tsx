@@ -1,5 +1,5 @@
-import { buildRailBracketPreview } from "../geometry/railBracket";
-import type { RailBracketParameters } from "../types/parts";
+import { buildPartPreview } from "../geometry/railBracket";
+import type { PartName, PartParameters } from "../types/parts";
 
 const strokeByLayer = {
   solid: "stroke-slate-100",
@@ -15,8 +15,8 @@ const dashByLayer = {
   center: "18 8 3 8",
 };
 
-export function RailBracketPreview({ params }: { params: RailBracketParameters }) {
-  const drawing = buildRailBracketPreview(params);
+export function RailBracketPreview({ partName, params }: { partName: PartName; params: PartParameters }) {
+  const drawing = buildPartPreview(partName, params);
 
   return (
     <svg className="h-full min-h-[520px] w-full" viewBox={drawing.viewBox} role="img" aria-label="Rail bracket preview">
@@ -27,6 +27,16 @@ export function RailBracketPreview({ params }: { params: RailBracketParameters }
       </defs>
       <rect width="100%" height="100%" fill="#111827" />
       <g strokeLinecap="round" strokeLinejoin="round">
+        {drawing.shapes.map((shape, index) => (
+          <polygon
+            key={`shape-${index}`}
+            points={shape.points}
+            fill="none"
+            className={shape.layer === "hidden" ? "stroke-fuchsia-500" : "stroke-slate-100"}
+            strokeWidth="2"
+            strokeDasharray={shape.layer === "hidden" ? "10 7" : undefined}
+          />
+        ))}
         {drawing.lines.map((line, index) => (
           <line
             key={index}
